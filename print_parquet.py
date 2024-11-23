@@ -2,6 +2,10 @@ import pyarrow.parquet as pq
 
 client_file_path = "data/client.parquet"
 
+'''
+Выводит данные о пользователях
+@filter - фильтрация клиентов перед отображением
+'''
 def getClients(filter = None):
 
     if (filter is not None):
