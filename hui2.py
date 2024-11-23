@@ -5,7 +5,7 @@ from tqdm import tqdm
 import shutil
 import os
 
-p = Path("telecom10k")
+p = Path("data/telecom10k")
 
 for x in p.rglob("*"):
     if (x.suffix == '.csv' or x.suffix == '.txt') and x.name.startswith('psx_'):
@@ -38,6 +38,7 @@ os.makedirs('processed/subs', exist_ok=True)
 
 for x in Path("processed").rglob("*"):
     if x.name.startswith('psx_62.0') or x.name.startswith('psx_69.0') or x.name.startswith('psx_65.0'):
+        print(x.name)
         df = pd.read_csv(x, sep=',')
         subsIdsList = df['IdSubscriber'].unique()
         for s in subsIdsList:
@@ -51,7 +52,8 @@ for x in Path("processed").rglob("*"):
 
 
     elif x.name.startswith('psx_66'):
-        df = pd.read_csv(x, sep='|')
+        print(x.name)
+        df = pd.read_csv(x, sep=',')
         subsIdsList = df['IdSubscriber'].unique()
         for s in subsIdsList:
             sub_file_name = f'processed/subs/{s}.csv'
