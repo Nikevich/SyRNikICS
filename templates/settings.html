@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<p class="warning-text">
+    Перед нажатием на кнопку убедитесь, что в корневой папке лежит директория с файлами <strong>data/telecom10k</strong>. 
+    После нажатия начнется процесс очистки датасета и создание индивидуальных CSV файлов с трафиком пользователей.
+</p>
+<div class="button-container">
+    <form id="renew-form" method="post" action="/settings">
+        <input type="hidden" name="renew" value="true">
+        <button type="submit" class="styled-button">Обновить настройки</button>
+    </form>
+</div>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="flash-container">
+            {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+        </div>
+        <script>
+            // Скрипт для автоматического скрытия сообщений
+            setTimeout(() => {
+                const flashMessages = document.querySelectorAll('.flash-message');
+                flashMessages.forEach((msg) => {
+                    msg.style.opacity = '0';
+                    setTimeout(() => msg.remove(), 500); // Удалить сообщение после анимации
+                });
+            }, 5000); // Сообщение будет видно 5 секунд
+        </script>
+    {% endif %}
+{% endwith %}
+
+<style>
+    /* Контейнер для всплывающих сообщений */
+    .flash-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+    /* Стили для каждого сообщения */
+    .flash-message {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        transition: opacity 0.5s ease;
+    }
+    /* Анимация при наведении (дополнительно) */
+    .flash-message:hover {
+        background-color: #0056b3;
+    }
+    .warning-text {
+        background-color: #ffe6e6; /* Светло-красный фон */
+        color: #cc0000; /* Темно-красный текст */
+        border: 1px solid #cc0000; /* Красная рамка */
+        padding: 15px;
+        border-radius: 5px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        line-height: 1.5;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тень для визуального эффекта */
+    }
+</style>
+
+<script>
+    function submitRenewForm() {
+        document.getElementById('renew-form').submit();
+    }
+
+    document.querySelectorAll('.flash-message').forEach(msg => {
+        msg.addEventListener('click', () => msg.remove());
+    }); 
+</script>
+
+{% endblock %}
