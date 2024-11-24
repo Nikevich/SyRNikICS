@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 from print_parquet import *
 from dataset_process import *
+from user_grafic import *
 import markdown
 
 app = Flask(__name__)
@@ -48,6 +49,27 @@ def settings():
         else:
             flash("Некорректный запрос.")
             return redirect(url_for("settings"))
+        
+@app.route("/subs", methods=["GET"])
+def sub():
+    # Путь к каталогу
+    directory = "processed/subs"
+    
+    # Получение списка файлов
+    files = [
+        {"name": file, "path": os.path.join(directory, file)}
+        for file in os.listdir(directory) if os.path.isfile(os.path.join(directory, file))
+    ]
+
+    # Рендер шаблона и передача списка файлов
+    return render_template("subs.html", files=files)
+
+@app.route("/plot", methods=["GET"])
+def plot():
+    graph_url_up = getUpTx(request.args.get('id'))
+    graph_url_down = getDownTx(request.args.get('id'))
+    # Передаем график на страницу
+    return render_template("plot.html", graph_url_up=graph_url_up, graph_url_down=graph_url_down)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Files in processed/subs</h1>
+    <ul>
+        {% for file in files %}
+            <li>
+                <a href="/plot?id={{ file.name }}">{{ file.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

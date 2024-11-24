@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>UpTx Graph</h1>
+<img src="{{ graph_url_up }}" alt="UpTx Graph" style="max-width:100%; height:auto;">
+<br>
+<a href="/subs">Back to File List</a>
+<h1>DownTx Graph</h1>
+<img src="{{ graph_url_down }}" alt="DownTx Graph" style="max-width:100%; height:auto;">
+<br>
+<a href="/subs">Back to File List</a>
+{% endblock %}
