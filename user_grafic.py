@@ -60,6 +60,3 @@ def getDownTx(path_subs):
     plt.savefig("data/traffic_plot_DownTx.png")  # Сохраняем график в файл
     return 'data/traffic_plot_DownTx.png'
 print("График сохранён как 'traffic_plot.png'")
-
-getUpTx('3904.csv')
-getDownTx('3904.csv')
