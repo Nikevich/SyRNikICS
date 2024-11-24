@@ -19,6 +19,7 @@ def getClients(filter = None):
 
     try:
         client_data = pq.read_table(client_file_path).to_pandas()
+        print(client_data)
         count_clients = client_data.shape[0]
         filtered_data = client_data.iloc[range_start:range_end]
 

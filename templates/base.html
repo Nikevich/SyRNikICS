@@ -61,6 +61,32 @@
         li a:hover {
             background-color: #ddd;
         }
+        .main-box {
+            margin: 0 auto; /* Центрирование по горизонтали */
+            width: 80%; /* Устанавливаем ширину блока */
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .styled-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .styled-button:hover {
+            background-color: #0056b3;
+        }
+        .styled-button:active {
+            transform: scale(0.98);
+        }
     </style>
     {% block header %}{% endblock %}
 </head>
@@ -68,6 +94,8 @@
     <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/clients">Clients</a></li>
+        <li><a href="/settings">Settings</a></li>
+        <li><a href="/subs">Subs</a></li>
       </ul>
     <div class="main-box">
         {% block content %}{% endblock %}
