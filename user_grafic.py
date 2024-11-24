@@ -11,19 +11,19 @@ def getUpTx(path_subs):
 
     for i in range(count - 1, 0, -1):  # Обратный цикл
         if pd.isna(data.loc[i, 'EndSession']):
-            data.loc[i, 'DownTx'] = data.loc[i, 'DownTx'] - data.loc[i - 1, 'DownTx']
-        if data.loc[i, 'DownTx'] < 0:
-            data.loc[i, 'DownTx'] = data.loc[i, 'DownTx'] * (-1) 
+            data.loc[i, 'UpTx'] = data.loc[i, 'UpTx'] - data.loc[i - 1, 'UpTx']
+        if data.loc[i, 'UpTx'] < 0:
+            data.loc[i, 'UpTx'] = data.loc[i, 'UpTx'] * (-1) 
 
 
     # Строим график
     plt.figure(figsize=(12, 6))
 
-    # Линия для DownTx
-    plt.plot(data['Timestamp'], data['DownTx'], 'r.')
+    # Линия для UpTx
+    plt.plot(data['Timestamp'], data['UpTx'], 'r.')
 
     # Настройки графика
-    plt.title('DownTx', fontsize=14)
+    plt.title('UpTx', fontsize=14)
     plt.xlabel('Время', fontsize=12)
     plt.ylabel('Трафик (bytes)', fontsize=12)
     plt.grid(True)
@@ -60,3 +60,6 @@ def getDownTx(path_subs):
     plt.savefig("data/traffic_plot_DownTx.png")  # Сохраняем график в файл
     return 'data/traffic_plot_DownTx.png'
 print("График сохранён как 'traffic_plot.png'")
+
+getUpTx('3904.csv')
+getDownTx('3904.csv')
